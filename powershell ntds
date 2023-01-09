@@ -1,0 +1,8 @@
+$LogName = 'Security'
+$EventId = 4656
+$RegistryValue = 'ntds.dit'
+
+Get-EventLog -LogName $LogName -InstanceId $EventId |
+    Where-Object {$_.Message -like "*$RegistryValue*"} |
+    Select-Object TimeGenerated, UserName, Message |
+    Format-Table -AutoSize
